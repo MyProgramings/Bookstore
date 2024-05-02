@@ -43,7 +43,7 @@ class BookController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'isbn' => ['required', 'alpha_num', Rule::unique('books', 'isbn')],
-            'cover_image' => 'image|required', 
+            'cover_image' => 'image|required',
             'category' => 'nullable',
             'authors' => 'nullable',
             'publisher' => 'nullable',
@@ -53,7 +53,7 @@ class BookController extends Controller
             'number_of_copies' => 'numeric|required',
             'price' => 'numeric|required',
         ]);
-        
+
         $book = new Book;
 
         $book->title = $request->title;
@@ -92,7 +92,7 @@ class BookController extends Controller
         $authors = Author::all();
         $categories = Category::all();
         $publishers = Publisher::all();
-        return view('admin.books.edit', compact('book','categories', 'authors', 'publishers'));
+        return view('admin.books.edit', compact('book', 'categories', 'authors', 'publishers'));
     }
 
     /**
@@ -102,7 +102,7 @@ class BookController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'cover_image' => 'image', 
+            'cover_image' => 'image',
             'category' => 'nullable',
             'authors' => 'nullable',
             'publisher' => 'nullable',
@@ -112,10 +112,10 @@ class BookController extends Controller
             'number_of_copies' => 'numeric|required',
             'price' => 'numeric|required',
         ]);
-        
+
 
         $book->title = $request->title;
-        if ($request->has ('cover_image')) {
+        if ($request->has('cover_image')) {
             Storage::disk('public')->delete($book->cover_image);
             $book->cover_image = $this->uploadImage($request->cover_image);
         }
@@ -150,11 +150,11 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         Storage::disk('public')->delete($book->cover_image);
- 
+
         $book->delete();
- 
-        session()->flash('flash_message','تم حذف الكتاب بنجاح');
- 
+
+        session()->flash('flash_message', 'تم حذف الكتاب بنجاح');
+
         return redirect(route('books.index'));
     }
 
@@ -168,7 +168,7 @@ class BookController extends Controller
     }
     public function rate(Request $request, Book $book)
     {
-        if(auth()->user()->rated($book)) {
+        if (auth()->user()->rated($book)) {
             $rating = Rating::where(['user_id' => auth()->user()->id, 'book_id' => $book->id])->first();
             $rating->value = $request->value;
             $rating->save();

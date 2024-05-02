@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -12,11 +13,11 @@ trait ImageUploadTrait
 
     public function uploadImage($img)
     {
-        if($img){
+        if ($img) {
             $manager = new ImageManager(new Driver());
             $img_name = $this->imageName($img);
             $img = $manager->read($img);
-            $img = $img->resize($this->img_width, $this->img_height)->save(storage_path($this->image_path.'/'.$img_name));
+            $img = $img->resize($this->img_width, $this->img_height)->save(storage_path($this->image_path . '/' . $img_name));
             // $img->toJpeg(80);
         }
         return "images/covers/" . $img_name;
@@ -24,6 +25,6 @@ trait ImageUploadTrait
 
     public function imageName($image)
     {
-        return time().'-'.$image->getClientOriginalName();
+        return time() . '-' . $image->getClientOriginalName();
     }
 }

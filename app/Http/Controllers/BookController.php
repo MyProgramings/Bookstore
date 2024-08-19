@@ -24,9 +24,6 @@ class BookController extends Controller
         return view('admin.books.index', compact('books'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $authors = Author::all();
@@ -35,9 +32,6 @@ class BookController extends Controller
         return view('admin.books.create', compact('categories', 'authors', 'publishers'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -76,17 +70,11 @@ class BookController extends Controller
         return redirect(route('books.show', $book));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Book $book)
     {
         return view('admin.books.show', compact('book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Book $book)
     {
         $authors = Author::all();

@@ -42,13 +42,6 @@ class PublisherController extends Controller
         return view('admin.publishers.edit', compact('publisher'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Publisher  $publisher
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Publisher $publisher)
     {
         $this->validate($request, ['name' => 'required']);
@@ -62,12 +55,6 @@ class PublisherController extends Controller
         return redirect(route('publishers.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Publisher  $publisher
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();

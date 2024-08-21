@@ -13,22 +13,11 @@ class PublisherController extends Controller
         return view('admin.publishers.index', compact('publishers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.publishers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required']);
@@ -43,23 +32,11 @@ class PublisherController extends Controller
         return redirect(route('publishers.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Publisher  $publisher
-     * @return \Illuminate\Http\Response
-     */
     public function show(Publisher $publisher)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Publisher  $publisher
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Publisher $publisher)
     {
         return view('admin.publishers.edit', compact('publisher'));
